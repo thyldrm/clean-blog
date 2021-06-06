@@ -23,9 +23,14 @@ app.use(
 );
 
 //DB Connect
-mongoose.connect("mongodb://localhost/cleanblog-test-db",{
-    useNewUrlParser:true,
-    useUnifiedTopology:true
+mongoose.connect("mongodb+srv://taha:eDD0ZOKYdxt9ONNq@cluster0.czvlj.mongodb.net/pcat-db?retryWrites=true&w=majority'",{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+}).then(()=> {
+  console.log('DB CONNECTED!')
+}).catch((err)=> {
+  console.log(err)
 })
 
 //Template Engine
@@ -49,7 +54,7 @@ app.get('/posts/edit/:id', PageController.getEditPage);
 
 
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Sunucu ${port} portunda başlatıldı..`);
 });
